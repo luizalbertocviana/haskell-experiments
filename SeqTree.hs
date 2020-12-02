@@ -4,7 +4,6 @@ import Prelude (Int, (+), (-), (^),
                 Ord, (<), (<=), max, Show)
 
 import Bool
-import List (foldl)
 import Maybe
 
 data SeqTree a = Empty
