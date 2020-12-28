@@ -149,7 +149,7 @@ instance UArrayElement Word64 where
 newtype Matrix r a = M (r a)
 
 elements :: MatrixRep r a => Matrix r a -> [RectIdx] -> [a]
-elements (M rep) idxs = map (elem rep) idxs
+elements (M rep) = map (elem rep)
 
 row :: MatrixRep r a => Matrix r a -> Word -> [a]
 row m@(M rep) i = elements m idxs where
@@ -207,7 +207,7 @@ update (M (Arr arr)) pos val = M (Arr arr') where
     pure marr
 
 updates :: Matrix Arr a -> [(RectIdx, a)] -> Matrix Arr a
-updates m = foldl' f m where
+updates = foldl' f where
   f mtx (pos, val) = update mtx pos val
 
 fromList :: forall a. RectIdx -> [a] -> Matrix Arr a
