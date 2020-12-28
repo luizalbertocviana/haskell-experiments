@@ -176,7 +176,7 @@ instance Functor (Matrix Fn) where
 instance Applicative (Matrix Fn) where
   pure x = M (Fn (0, 0) (const x))
   (M (Fn (r1, c1) f)) <*> (M (Fn (r2, c2) e)) = M (Fn dim g) where
-    g pos = (f pos) (e pos)
+    g pos = f pos (e pos)
     dim = (max r1 r2, max c1 c2)
 
 zipWith :: (a -> b -> c) -> Matrix Fn a -> Matrix Fn b -> Matrix Fn c
