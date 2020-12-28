@@ -5,10 +5,9 @@
 
 module Matrix where
 
-import Prelude (Bool, Char, Double, Float, id, ($), (*), (+), repeat, zip, (<$>), map, max, (.), Num, Functor(fmap), Applicative(pure, (<*>)), Show(show), error, snd, fst)
+import Prelude (const, Bool, Char, Double, Float, id, ($), (*), (+), repeat, zip, (<$>), map, max, (.), Num, Functor(fmap), Applicative(pure, (<*>)), Show(show), error, snd, fst)
 import Data.Eq (Eq((==)))
-import Data.List (intercalate)
-import Data.List (foldl')
+import Data.List (intercalate, foldl')
 import qualified Data.List as List
 import Data.Foldable (Foldable(sum))
 import Data.Array.IArray (listArray, (!), Array, bounds)
