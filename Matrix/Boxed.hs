@@ -31,6 +31,6 @@ updates :: Matrix Arr a -> [(RectIdx, a)] -> Matrix Arr a
 updates = foldl' f where
   f mtx (pos, val) = update mtx pos val
 
-fromList :: forall a. RectIdx -> [a] -> Matrix Arr a
+fromList :: RectIdx -> [a] -> Matrix Arr a
 fromList dim xs = M (Arr arr) where
   arr = listArray ((1, 1), dim) xs
