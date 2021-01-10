@@ -4,11 +4,14 @@
 
 module Matrix.Unboxed where
 
-import Matrix.Base (RectIdx, MatrixRep(..), Fn(..))
+import Matrix.Base (Matrix(..), RectIdx, MatrixRep(..), Fn(..))
 import Data.Array.Unboxed (UArray)
 import Data.Int
 import Data.Word
 import Data.Array.IArray (listArray, IArray(bounds), (!))
+import Data.Array.ST (writeArray, runSTUArray)
+import Data.Array.Base (unsafeThaw)
+import Data.List (foldl')
 
 newtype UArr a = UArr (UArrayOf a)
 
