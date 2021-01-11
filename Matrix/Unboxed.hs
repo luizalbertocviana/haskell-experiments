@@ -182,3 +182,14 @@ instance UArrayElement Word64 where
       writeArray marr pos val
       pure marr
 
+update :: UArrayElement a => Matrix UArr a -> RectIdx -> a -> Matrix UArr a
+update (M (UArr arr)) pos val = M (UArr arr') where
+  arr' = updateUArray arr pos val
+
+updates :: UArrayElement a => Matrix UArr a -> [(RectIdx, a)] -> Matrix UArr a
+updates = foldl' f where
+  f m (pos, val) = update m pos val
+
+fromList :: UArrayElement a => RectIdx -> [a] -> Matrix UArr a
+fromList dim xs = M (UArr arr) where
+  arr = uarrayFromList dim xs
