@@ -8,11 +8,9 @@ import Data.Eq (Eq((==)))
 import qualified Data.List as List
 import Data.Foldable (Foldable(sum))
 import Data.Word (Word)
+import Combinatorial (cartesian)
 
 type RectIdx = (Word, Word)
-
-cartesian :: [a] -> [b] -> [(a, b)]
-cartesian xs ys = (,) <$> xs <*> ys
 
 class MatrixRep r a where
   elem :: r a -> RectIdx -> a
