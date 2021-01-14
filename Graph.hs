@@ -1,45 +1,38 @@
-module Graph (Graph, empty, edgeless,
-              addVertex, hasVertex, vertices,
-              addEdge, neighbors, hasEdge) where
+module Graph where
 
-import Prelude (Int, (+), (-), Bool,
-                (==), (<=))
+import Data.Word ( Word64 )
+import Combinatorial (pairs, cartesian)
 
-import Bool
-import Functions
-import List
-import Maybe
-import qualified SeqTree as Seq
+type Vertex = Word64
+type Edge = (Vertex, Vertex)
 
-type Vertex = Int
+data Graph = G Word64 (Edge -> Bool)
 
-data Graph = G Int (Seq.SeqTree [Vertex])
+empty :: Word64 -> Graph
+empty n = G n (const False)
 
-empty :: Graph
-empty = G 0 Seq.empty
-
-addVertex :: Graph -> Graph
-addVertex (G n adj) = G (n + 1) (Seq.insert adj [])
-
-edgeless :: Int -> Graph
-edgeless n = cond (n <= 0) empty (addVertex g) where
-    g = edgeless (n - 1)
-
-hasVertex :: Graph -> Vertex -> Bool
-hasVertex (G n _) v = and [1 <= v, v <= n]
+complete :: Word64 -> Graph
+complete n = G n (const True)
 
 vertices :: Graph -> [Vertex]
-vertices (G n _) = take n (iterate (+1) 1)
+vertices (G n _) = [1..n]
 
-addEdge :: Graph -> Vertex -> Vertex -> Graph
-addEdge g@(G n adj) u v = cond verticesExist g' g where
-    verticesExist = and [g `hasVertex` u, g `hasVertex` v]
-    g' = G n adj'
-    adj' = Seq.update adj u (v:)
+edges :: Graph -> [Edge]
+edges (G n adj) = filter adj $ pairs [1..n]
 
-neighbors :: Graph -> Vertex -> [Vertex]
-neighbors (G _ adj) v = fromMaybe [] (Seq.lookup adj v)
+hasEdge :: Graph -> Edge -> Bool
+hasEdge (G _ adj) = adj
 
-hasEdge :: Graph -> Vertex -> Vertex -> Bool
-hasEdge g u v = f (neighbors g u) where
-    f = isJust . find (==v)
+addEdge :: Graph -> Edge -> Graph
+addEdge g@(G n adj) edge =
+  if adj edge
+  then g
+  else G n adj' where
+    adj' e = e == edge || adj e
+
+removeEdge :: Graph -> Edge -> Graph
+removeEdge g@(G n adj) edge =
+  if adj edge
+  then G n adj'
+  else g where
+    adj' e = e /= edge && adj e
