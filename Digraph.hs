@@ -67,3 +67,15 @@ cycle :: Word64 -> Digraph
 cycle n = D n adj where
   adj arc = arc == (n - 1, 0) || adjPath arc
   (D _ adjPath) = path n
+
+union :: Digraph -> Digraph -> Digraph
+union (D n1 adj1) (D n2 adj2) = D n adj where
+  n = max n1 n2
+  adj arc = adj1 arc || adj2 arc
+
+shift :: Word64 -> Digraph -> Digraph
+shift k (D n adj) = D (n + k) adj' where
+  adj' (u, v) = u >= k && v >= k && adj (u - k, v - k)
+
+shiftedUnion :: Digraph -> Digraph -> Digraph
+shiftedUnion d1@(D n1 _) d2 = union d1 $ shift n1 d2
