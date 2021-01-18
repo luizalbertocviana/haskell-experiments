@@ -10,8 +10,8 @@ type Arc = (Vertex, Vertex)
 
 data Digraph = D Word64 (Arc -> Bool)
 
-verify :: Digraph -> Arc -> Bool
-verify (D n _) (u, v) = u < n && v < n
+verify :: Word64 -> Arc -> Bool
+verify n (u, v) = u < n && v < n
 
 empty :: Word64 -> Digraph
 empty n = D n (const False)
@@ -31,14 +31,14 @@ hasArc d@(D _ adj) arc = verify d arc && adj arc
 
 addArc :: Digraph -> Arc -> Digraph
 addArc d@(D n adj) arc =
-  if adj arc || not (verify d arc)
+  if adj arc || not (verify n arc)
   then d
   else D n adj' where
     adj' e = e == arc || adj e
 
 removeArc :: Digraph -> Arc -> Digraph
 removeArc d@(D n adj) arc =
-  if adj arc && verify d arc
+  if adj arc && verify n arc
   then D n adj'
   else d where
     adj' e = e /= arc && adj e
