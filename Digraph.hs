@@ -17,7 +17,7 @@ empty :: Word64 -> Digraph
 empty n = D n (const False)
 
 complete :: Word64 -> Digraph
-complete n = D n (const True)
+complete n = D n (verify n)
 
 vertices :: Digraph -> [Vertex]
 vertices (D n _) = [0..n - 1]
