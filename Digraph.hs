@@ -27,7 +27,7 @@ arcs d@(D _ adj) = filter adj $ cartesian verts verts where
   verts = vertices d
 
 hasArc :: Digraph -> Arc -> Bool
-hasArc d@(D _ adj) arc = verify d arc && adj arc
+hasArc d@(D n adj) = adj
 
 addArc :: Digraph -> Arc -> Digraph
 addArc d@(D n adj) arc =
