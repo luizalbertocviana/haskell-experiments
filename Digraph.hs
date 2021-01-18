@@ -3,7 +3,7 @@ module Digraph () where
 import Data.Word ( Word64 )
 import Combinatorial (cartesian)
 
-import Prelude (Bool(..), (<), (&&), const, (+), (-), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd)
+import Prelude (Ord((>=), max), Bool(..), (<), (&&), const, (+), (-), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd)
 
 type Vertex = Word64
 type Arc = (Vertex, Vertex)
