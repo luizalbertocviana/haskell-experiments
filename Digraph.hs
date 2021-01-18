@@ -61,7 +61,7 @@ inNeighbors d v = map fst (inArcs d v)
 
 path :: Word64 -> Digraph
 path n = D n adj where
-  adj (u, v) = v == u + 1
+  adj arc@(u, v) = verify n arc && v == u + 1
 
 cycle :: Word64 -> Digraph
 cycle n = D n adj where
