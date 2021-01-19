@@ -22,6 +22,10 @@ empty n = D n (const False)
 complete :: Word64 -> Digraph
 complete n = D n (verify n)
 
+loopless :: Digraph -> Digraph
+loopless (D n adj) = D n adj' where
+  adj' arc@(u, v) = u /= v && adj arc
+
 vertices :: Digraph -> [Vertex]
 vertices (D n _) = [0..n - 1]
 
