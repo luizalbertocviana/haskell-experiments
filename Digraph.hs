@@ -91,3 +91,11 @@ shift k (D n adj) = D (n + k) adj' where
 
 shiftedUnion :: Digraph -> Digraph -> Digraph
 shiftedUnion d1@(D n1 _) d2 = union d1 $ shift n1 d2
+
+transpose :: Digraph -> Digraph
+transpose (D n adj) = D n adj' where
+  adj' (u, v) = adj (v, u)
+
+complement :: Digraph -> Digraph
+complement (D n adj) = D n $ not . adj
+
