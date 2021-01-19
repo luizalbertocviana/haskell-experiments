@@ -1,9 +1,12 @@
 module Digraph () where
 
 import Data.Word ( Word64 )
-import Combinatorial (cartesian)
+import Data.List (foldl')
 
-import Prelude (Ord((>=), max), Bool(..), (<), (&&), const, (+), (-), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd)
+import Prelude (Ord((>=), max), Bool(..), (<), (&&), const, (+), (-), (*), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd, even, (.), (^))
+
+import Combinatorial (cartesian)
+import qualified BitSet as BS
 
 type Vertex = Word64
 type Arc = (Vertex, Vertex)
