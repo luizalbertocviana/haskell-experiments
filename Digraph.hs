@@ -99,3 +99,9 @@ transpose (D n adj) = D n adj' where
 complement :: Digraph -> Digraph
 complement (D n adj) = D n $ not . adj
 
+toBitSet :: Digraph -> Digraph
+toBitSet d@(D n _) = D n adj' where
+  adj' arc = BS.get bs $ idx arc
+  idx (i, j) = i * n + j
+  bs = foldl' f (BS.new $ n^2) $ map idx $ arcs d
+  f bitset i = BS.set bitset i True
