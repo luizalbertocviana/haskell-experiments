@@ -75,6 +75,11 @@ cycle n = D n adj where
   adj arc = arc == (n - 1, 0) || adjPath arc
   (D _ adjPath) = path n
 
+matching :: Word64 -> Digraph
+matching m = D n adj where
+  adj arc@(u, v) = verify n arc && even u && v == u + 1
+  n = 2 * m
+
 union :: Digraph -> Digraph -> Digraph
 union (D n1 adj1) (D n2 adj2) = D n adj where
   n = max n1 n2
