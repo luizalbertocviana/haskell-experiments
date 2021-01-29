@@ -56,3 +56,4 @@
 *.hi
 *.o
 /Graph/Directed.hs~
+/Graph/Undirected.hs~
