@@ -52,6 +52,16 @@ removeArc d@(D n adj) arc =
   else d where
     adj' e = e /= arc && adj e
 
+filterArcs :: (Arc -> Bool) -> Digraph -> Digraph
+filterArcs p (D n adj) = D n adj' where
+  adj' arc = p arc && adj arc
+
+removeForwardArcs :: Digraph -> Digraph
+removeForwardArcs = filterArcs $ \(u, v) -> u >= v
+
+removeBackwardArcs :: Digraph -> Digraph
+removeBackwardArcs = filterArcs $ \(u, v) -> u <= v
+
 outArcs :: Digraph -> Vertex -> [Arc]
 outArcs d@(D n adj) u
   | u < n = filter adj $ zip (repeat u) (vertices d)
