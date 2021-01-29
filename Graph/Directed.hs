@@ -5,7 +5,7 @@ module Graph.Directed (Digraph, Vertex, empty, complete, loopless,
 import Data.Word ( Word64 )
 import Data.List (foldl')
 
-import Prelude (Ord((>=), max), Bool(..), (<), (&&), const, (+), (-), (*), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd, even, (.), (^))
+import Prelude (Ord((>=), (<=), max), Bool(..), (<), (&&), const, (+), (-), (*), filter, ($), (||), not, (==), (/=), zip, repeat, otherwise, map, fst, snd, even, (.), (^))
 
 import Combinatorial (cartesian)
 import qualified BitSet as BS
