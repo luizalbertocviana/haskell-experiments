@@ -1,4 +1,6 @@
-module Graph.Directed () where
+module Graph.Directed (Digraph, Vertex, empty, complete, loopless,
+                       vertices, arcs,
+                       filterArcs, removeForwardArcs, removeBackwardArcs) where
 
 import Data.Word ( Word64 )
 import Data.List (foldl')
