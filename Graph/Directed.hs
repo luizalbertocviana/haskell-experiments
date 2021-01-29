@@ -1,4 +1,4 @@
-module Digraph () where
+module Graph.Directed () where
 
 import Data.Word ( Word64 )
 import Data.List (foldl')
