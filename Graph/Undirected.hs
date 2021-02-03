@@ -1,5 +1,7 @@
 module Graph.Undirected () where
 
+import Prelude hiding (cycle)
+
 import Data.Word (Word64)
 
 import qualified Graph.Directed as D
