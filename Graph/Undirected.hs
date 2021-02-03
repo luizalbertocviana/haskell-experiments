@@ -42,3 +42,33 @@ addEdge = withAdjustment D.addArc
 
 removeEdge :: Graph -> Edge -> Graph
 removeEdge = withAdjustment D.removeArc
+
+filterEdges :: (Edge -> Bool) -> Graph -> Graph
+filterEdges p (G digraph) = G $ D.filterArcs p digraph
+
+incidentEdges :: Graph -> D.Vertex -> [Edge]
+incidentEdges g = filter (hasEdge g) . zip (vertices g) . repeat
+
+neighbors :: Graph -> D.Vertex -> [D.Vertex]
+neighbors g = map fst . incidentEdges g
+
+path :: Word64 -> Graph
+path = G . D.path
+
+matching :: Word64 -> Graph
+matching = G . D.matching
+
+cycle :: Word64 -> Graph
+cycle n = addEdge (path n) (n - 1, 0)
+
+union :: Graph -> Graph -> Graph
+union (G d1) (G d2) = G $ D.union d1 d2
+
+shift :: Word64 -> Graph -> Graph
+shift k (G digraph) = G $ D.shift k digraph
+
+shiftedUnion :: Graph -> Graph -> Graph
+shiftedUnion (G d1) (G d2) = G $ D.shiftedUnion d1 d2
+
+complement :: Graph -> Graph
+complement (G digraph) = G $ D.removeBackwardArcs $ D.complement digraph
