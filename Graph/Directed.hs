@@ -76,10 +76,10 @@ inArcs d@(D n adj) v
   | otherwise = []
 
 outNeighbors :: Digraph -> Vertex -> [Vertex]
-outNeighbors d u = map snd (outArcs d u)
+outNeighbors d = map snd . outArcs d
 
 inNeighbors :: Digraph -> Vertex -> [Vertex]
-inNeighbors d v = map fst (inArcs d v)
+inNeighbors d = map fst . inArcs d
 
 path :: Word64 -> Digraph
 path n = D n adj where
