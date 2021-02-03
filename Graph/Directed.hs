@@ -1,6 +1,7 @@
 module Graph.Directed (Digraph, Vertex, empty, complete, loopless,
                        vertices, arcs,
-                       filterArcs, removeForwardArcs, removeBackwardArcs) where
+                       filterArcs, removeForwardArcs, removeBackwardArcs,
+                       hasArc, addArc, removeArc) where
 
 import Data.Word ( Word64 )
 import Data.List (foldl')
