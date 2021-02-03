@@ -1,7 +1,10 @@
 module Graph.Directed (Digraph, Vertex, empty, complete, loopless,
                        vertices, arcs,
                        filterArcs, removeForwardArcs, removeBackwardArcs,
-                       hasArc, addArc, removeArc) where
+                       hasArc, addArc, removeArc,
+                       path, cycle, matching,
+                       union, shift, shiftedUnion, complement) where
+
 
 import Data.Word ( Word64 )
 import Data.List (foldl')
