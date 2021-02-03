@@ -28,3 +28,15 @@ vertices (G digraph) = D.vertices digraph
 
 edges :: Graph -> [Edge]
 edges (G digraph) = D.arcs digraph
+
+hasEdge :: Graph -> Edge -> Bool
+hasEdge (G digraph) = D.hasArc digraph . adjust
+
+withAdjustment :: (D.Digraph -> Edge -> D.Digraph) -> Graph -> Edge -> Graph
+withAdjustment f (G digraph) = G . f digraph . adjust
+
+addEdge :: Graph -> Edge -> Graph
+addEdge = withAdjustment D.addArc
+
+removeEdge :: Graph -> Edge -> Graph
+removeEdge = withAdjustment D.removeArc
