@@ -60,10 +60,10 @@ filterArcs p (D n adj) = D n adj' where
   adj' arc = p arc && adj arc
 
 removeForwardArcs :: Digraph -> Digraph
-removeForwardArcs = filterArcs $ \(u, v) -> u >= v
+removeForwardArcs = filterArcs $ uncurry (>=)
 
 removeBackwardArcs :: Digraph -> Digraph
-removeBackwardArcs = filterArcs $ \(u, v) -> u <= v
+removeBackwardArcs = filterArcs $ uncurry (<=)
 
 outArcs :: Digraph -> Vertex -> [Arc]
 outArcs d@(D n adj) u
